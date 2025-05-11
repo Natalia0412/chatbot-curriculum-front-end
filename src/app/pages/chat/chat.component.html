@@ -1,0 +1,8 @@
+<div class="container mt-4">
+  <h2>ChatBot Currículo</h2>
+
+  <div class="mb-3">
+    <label for="formFile" class="form-label">Upload do Currículo (PDF)</label>
+    <input type="file" class="form-control" (change)="onFileSelected($event)" />
+    <button class="btn btn-primary mt-2" (click)="upload()">Enviar</button>
+  </div>
