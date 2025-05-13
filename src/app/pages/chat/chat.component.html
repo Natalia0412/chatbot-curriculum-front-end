@@ -1,9 +1,7 @@
 <mat-accordion class="example-headers-align" multi>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
-      <mat-panel-title>
-        Upload
-      </mat-panel-title>
+      <mat-panel-title> Upload </mat-panel-title>
       <mat-panel-description>
         Faça upload do Currículo no formato PDF
         <mat-icon>attach_file</mat-icon>
@@ -13,32 +11,56 @@
     <!-- Container flexível -->
     <div class="upload-container">
       <mat-form-field appearance="fill" class="upload-input">
-        <input type="file" (change)="onFileSelected($event)" hidden #fileInput />
-        <input matInput [value]="pdfFile?.name || ''" placeholder="Nenhum arquivo selecionado" readonly />
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          hidden
+          #fileInput
+        />
+        <input
+          matInput
+          [value]="pdfFile?.name || ''"
+          placeholder="Nenhum arquivo selecionado"
+          readonly
+        />
         <button mat-icon-button matSuffix (click)="fileInput.click()">
           <mat-icon>attach_file</mat-icon>
         </button>
       </mat-form-field>
 
-      <button mat-raised-button color="primary"  (click)="upload()" [disabled]="!pdfFile" >
-        Enviar
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="upload()"
+        [disabled]="!pdfFile || control_submit_button_upload"
+      >
+        {{ control_submit_button_upload ? " Enviado" : "Enviar" }}
       </button>
     </div>
   </mat-expansion-panel>
-<!-- fim  upload-->
+  <!-- fim  upload-->
 
-
-   <mat-expansion-panel>
+  <!-- inicio carregar -->
+  <mat-expansion-panel>
     <mat-expansion-panel-header>
-      <mat-panel-title>
-        Carregar Dados
-      </mat-panel-title>
+      <mat-panel-title> Carregar Dados </mat-panel-title>
       <mat-panel-description>
         Carregue os dados para o banco de dados Faiss
-        <mat-icon fontIcon="data base"></mat-icon>>
+        <mat-icon>storage</mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
+    <div class="load-container">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="loadData()"
+        [disabled]="control_button_load_faiss || !control_submit_button_upload"
+        class="load-button"
+      >
+        {{ control_button_load_faiss ? " Carregado" : "Carregar" }}
+      </button>
+    </div>
   </mat-expansion-panel>
 
-<!-- fim -->
+  <!-- fim -->
 </mat-accordion>
