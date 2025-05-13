@@ -13,6 +13,7 @@
       <mat-form-field appearance="fill" class="upload-input">
         <input
           type="file"
+          id="pdfFile"
           (change)="onFileSelected($event)"
           hidden
           #fileInput
@@ -61,6 +62,63 @@
       </button>
     </div>
   </mat-expansion-panel>
+  <!-- fim carregar -->
+
+  <!-- inicio chat -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Chat </mat-panel-title>
+      <mat-panel-description>
+        Converse com o assistente
+        <mat-icon>chat</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <!-- Container flexível -->
+    <div class="chat-container">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Pergunta</mat-label>
+        <input
+          matInput
+          [(ngModel)]="question"
+          placeholder="Digite sua pergunta"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Filtro</mat-label>
+        <mat-select [(ngModel)]="filter">
+          <mat-option value="formacao">Formação</mat-option>
+          <mat-option value="experiencia_profissional">Experiência</mat-option>
+          <mat-option value="informacoes_pessoais"
+            >Informações Pessoais</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="sendQuestion()"
+        [disabled]="!question || !filter"
+      >
+        Enviar Pergunta
+      </button>
+
+      <mat-card class="mt-4" *ngIf="historical.length > 0">
+        <mat-card-title>Histórico</mat-card-title>
+        <mat-list>
+          <mat-list-item *ngFor="let item of historical">
+            <strong *ngIf="item.role === 'user'">👤 Você:</strong>
+            <strong *ngIf="item.role === 'ia'">🤖 IA:</strong>
+            <span class="ms-2">{{ item.content }}</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
+
+    </div>
+  </mat-expansion-panel>
+  <!-- fim  chat -->
 
   <!-- fim -->
 </mat-accordion>

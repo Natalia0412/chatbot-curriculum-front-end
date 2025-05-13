@@ -23,6 +23,7 @@ export class ChatComponent implements OnInit {
   constructor(private chatbotService: ChatbotService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+     this.loadHistorical();
   }
 
   onFileSelected(event: any) {
@@ -49,7 +50,7 @@ export class ChatComponent implements OnInit {
         },
         error: (err) => {
           this.snackBar.open(err.error.mensagem || 'Erro ao enviar currículo!', 'Fechar', {
-            duration: 7000
+            // duration: 7000
           });
           this.control_submit_button_upload = false
         }
@@ -61,17 +62,58 @@ export class ChatComponent implements OnInit {
     if (this.responseData) {
       this.chatbotService.loadData(this.responseData).subscribe({
         next: (res) => {
+
           this.snackBar.open(res.response.mensagem || 'Dados carregados com sucesso!', 'Fechar', { duration: 7000 });
           this.control_button_load_faiss = true;
         },
         error: (err) => {
           this.snackBar.open(err.error.mensagem || 'Erro ao carregar dados!', 'Fechar', {
-            duration: 7000
+            // duration: 7000
           });
           this.control_button_load_faiss = false;
         }
       });
     }
+  }
+
+  sendQuestion() {
+    if (this.question && this.filter) {
+
+      const payload = {
+        pergunta: this.question,
+        filtro: this.filter
+      };
+
+      this.chatbotService.sendQuestion(payload).subscribe({
+        next: (res) => {
+          this.historical.push(
+            { role: 'user', content: this.question },
+            { role: 'ia', content: res.mensagem }
+          );
+          this.question = '';
+          this.filter = '';
+        },
+        error: (err) => {
+          this.snackBar.open(err.error.mensagem || 'Erro ao enviar pergunta!', 'Fechar', {
+          });
+        }
+      });
+    }
+  }
+
+  loadHistorical() {
+    this.chatbotService.getHistory().subscribe({
+      next: (res) => {
+        if (res.status === 'sucesso'){
+          this.historical = res.historico;
+        }
+
+      },
+      error: (err) => {
+        this.snackBar.open(err.error.mensagem || 'Erro ao carregar histórico!', 'Fechar', {
+        });
+      }
+    });
   }
 
 }
