@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:100&display=swap');
+
+.upload-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  .upload-input {
+    flex: 1;
+  }
+
+  button {
+    margin-left: 8px;
+    height: 56px;
+    margin-block-end: auto;
+  }
+
+  button[mat-raised-button][color="primary"][disabled] {
+    background-color: #5CA4EA;
+    color: white;
+    // font-family: 'Lato', sans-serif;
+
+  }
+
+
+
+
+}
+
+
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
+

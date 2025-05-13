@@ -7,6 +7,8 @@ import { ChatComponent } from './pages/chat/chat.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MaterialModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

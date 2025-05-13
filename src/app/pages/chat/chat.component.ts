@@ -16,6 +16,7 @@ export class ChatComponent implements OnInit {
   filter = '';
   historical: any[] = [];
   responseData: any;
+  selectedFile = false;
 
   constructor(private chatbotService: ChatbotService, private snackBar: MatSnackBar) { }
 

@@ -1,8 +1,44 @@
-<div class="container mt-4">
-  <h2>ChatBot Currículo</h2>
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Upload
+      </mat-panel-title>
+      <mat-panel-description>
+        Faça upload do Currículo no formato PDF
+        <mat-icon>attach_file</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
 
-  <div class="mb-3">
-    <label for="formFile" class="form-label">Upload do Currículo (PDF)</label>
-    <input type="file" class="form-control" (change)="onFileSelected($event)" />
-    <button class="btn btn-primary mt-2" (click)="upload()">Enviar</button>
-  </div>
+    <!-- Container flexível -->
+    <div class="upload-container">
+      <mat-form-field appearance="fill" class="upload-input">
+        <input type="file" (change)="onFileSelected($event)" hidden #fileInput />
+        <input matInput [value]="pdfFile?.name || ''" placeholder="Nenhum arquivo selecionado" readonly />
+        <button mat-icon-button matSuffix (click)="fileInput.click()">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary"  (click)="upload()" [disabled]="!pdfFile" >
+        Enviar
+      </button>
+    </div>
+  </mat-expansion-panel>
+<!-- fim  upload-->
+
+
+   <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Carregar Dados
+      </mat-panel-title>
+      <mat-panel-description>
+        Carregue os dados para o banco de dados Faiss
+        <mat-icon fontIcon="data base"></mat-icon>>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+
+<!-- fim -->
+</mat-accordion>
